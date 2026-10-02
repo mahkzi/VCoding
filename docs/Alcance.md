@@ -1,0 +1,1 @@
+Schemaweek es una aplicación web orientada a estudiantes que necesitan organizar sus materias, clases, tareas, fechas de entrega y actividades personales dentro de una planificación semanal. El objetivo principal no es solamente administrar tareas, sino ayudar al estudiante a **organizar su tiempo teniendo en cuenta sus horarios disponibles y su carga académica**
