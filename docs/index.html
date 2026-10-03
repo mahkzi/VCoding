@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schemaweek · Weekly planner for students</title>
+    <meta name="description" content="Weekly planner for students: organize subjects, tasks and deadlines in one place.">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <a class="skip-link" href="#content">Skip to content</a>
+
+    <header class="site-header">
+        <div class="container site-header__inner">
+            <h1 class="brand">Schemaweek</h1>
+            <p class="brand__tagline">Weekly planner for students</p>
+            <nav class="site-nav" aria-label="Page sections">
+                <ul class="site-nav__list">
+                    <li><a href="#summary">Summary</a></li>
+                    <li><a href="#new-task">New task</a></li>
+                    <li><a href="#tasks">Tasks</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="content" class="container">
+        <section id="summary" class="panel" aria-labelledby="summary-title">
+            <h2 id="summary-title">Summary</h2>
+            <dl class="stats" aria-live="polite">
+                <div class="stat">
+                    <dt class="stat__label">Pending</dt>
+                    <dd class="stat__value" id="stat-pending">0</dd>
+                </div>
+                <div class="stat">
+                    <dt class="stat__label">Completed</dt>
+                    <dd class="stat__value" id="stat-completed">0</dd>
+                </div>
+                <div class="stat">
+                    <dt class="stat__label">Estimated pending hours</dt>
+                    <dd class="stat__value" id="stat-hours">0 h</dd>
+                </div>
+            </dl>
+            <div class="progress">
+                <label class="progress__label" for="progress">Task progress</label>
+                <progress id="progress" max="100" value="0"></progress>
+                <span class="progress__text" id="progress-text">0%</span>
+            </div>
+            <p class="next-due" id="next-due" aria-live="polite">No pending deadlines.</p>
+        </section>
+
+        <section id="new-task" class="panel" aria-labelledby="new-task-title">
+            <h2 id="new-task-title">New task</h2>
+            <form class="form" id="task-form">
+                <div class="form__field form__field--full">
+                    <label for="title">Title</label>
+                    <input type="text" id="title" name="title" maxlength="100" required>
+                </div>
+                <div class="form__field form__field--full">
+                    <label for="description">Description (optional)</label>
+                    <textarea id="description" name="description" rows="3" maxlength="300"></textarea>
+                </div>
+                <div class="form__field">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" maxlength="60" required>
+                </div>
+                <div class="form__field">
+                    <label for="duration">Estimated duration (hours)</label>
+                    <input type="number" id="duration" name="duration" min="0.5" max="40" step="0.5" required>
+                </div>
+                <div class="form__field">
+                    <label for="priority">Priority</label>
+                    <select id="priority" name="priority" required>
+                        <option value="high">High</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="low">Low</option>
+                    </select>
+                </div>
+                <div class="form__field">
+                    <label for="due-date">Due date</label>
+                    <input type="date" id="due-date" name="dueDate" required>
+                </div>
+                <div class="form__actions">
+                    <button class="btn btn--primary" type="submit">Create task</button>
+                </div>
+            </form>
+        </section>
+
+        <section id="tasks" class="panel" aria-labelledby="tasks-title">
+            <h2 id="tasks-title">Tasks</h2>
+            <p class="empty-state" id="empty-state">No tasks yet. Add one using the form.</p>
+            <ul class="task-list" id="task-list"></ul>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>Schemaweek · Module 2</p>
+    </footer>
+
+    <template id="task-template">
+        <li class="task">
+            <input class="task__check" type="checkbox">
+            <div class="task__body">
+                <h3 class="task__title"></h3>
+                <p class="task__meta">
+                    <span class="task__subject"></span>
+                    <span class="task__duration"></span>
+                    <span class="badge"></span>
+                    <span class="badge badge--overdue" hidden>Overdue</span>
+                    <time class="task__due"></time>
+                </p>
+                <p class="task__description"></p>
+            </div>
+            <button class="btn btn--danger task__delete" type="button">Delete</button>
+        </li>
+    </template>
+</body>
+</html>
