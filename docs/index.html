@@ -1,119 +1,140 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Schemaweek · Weekly planner for students</title>
-    <meta name="description" content="Weekly planner for students: organize subjects, tasks and deadlines in one place.">
-    <link rel="stylesheet" href="css/style.css">
-    <script src="js/script.js" defer></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Schemaweek · Planificador semanal para estudiantes</title>
+  <meta name="description" content="Planificador semanal para estudiantes: organizá materias, tareas y fechas de entrega en un solo lugar.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <script src="js/script.js" defer></script>
 </head>
 <body>
-    <a class="skip-link" href="#content">Skip to content</a>
+  <a class="skip-link" href="#content">Ir al contenido</a>
 
-    <header class="site-header">
-        <div class="container site-header__inner">
-            <h1 class="brand">Schemaweek</h1>
-            <p class="brand__tagline">Weekly planner for students</p>
-            <nav class="site-nav" aria-label="Page sections">
-                <ul class="site-nav__list">
-                    <li><a href="#summary">Summary</a></li>
-                    <li><a href="#new-task">New task</a></li>
-                    <li><a href="#tasks">Tasks</a></li>
-                </ul>
-            </nav>
+  <header class="site-header">
+    <div class="container site-header__inner">
+      <h1 class="brand">Schemaweek</h1>
+      <p class="brand__tagline">Planificador semanal para estudiantes</p>
+      <nav class="site-nav" aria-label="Secciones de la página">
+        <ul class="site-nav__list">
+          <li><a class="site-nav__link" href="#summary">Resumen</a></li>
+          <li><a class="site-nav__link" href="#new-task">Nueva tarea</a></li>
+          <li><a class="site-nav__link" href="#tasks">Tareas</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="content" class="container page">
+    <p class="notice notice--warning page__full" id="storage-warning" role="alert" hidden>No se pudo guardar en este navegador. Los cambios se perderán al cerrar o recargar la página.</p>
+
+    <section id="summary" class="panel page__full" aria-labelledby="summary-title">
+      <h2 class="panel__title" id="summary-title">Resumen</h2>
+      <dl class="stats">
+        <div class="stat">
+          <dt class="stat__label">Pendientes</dt>
+          <dd class="stat__value" id="stat-pending">0</dd>
         </div>
-    </header>
+        <div class="stat">
+          <dt class="stat__label">Completadas</dt>
+          <dd class="stat__value" id="stat-completed">0</dd>
+        </div>
+        <div class="stat">
+          <dt class="stat__label">Vencidas</dt>
+          <dd class="stat__value" id="stat-overdue">0</dd>
+        </div>
+        <div class="stat">
+          <dt class="stat__label">Horas pendientes estimadas</dt>
+          <dd class="stat__value" id="stat-hours">0 h</dd>
+        </div>
+      </dl>
+      <div class="progress">
+        <label class="progress__label" for="progress">Progreso de tareas</label>
+        <progress class="progress__bar" id="progress" max="100" value="0"></progress>
+        <span class="progress__text" id="progress-text">0%</span>
+      </div>
+      <p class="next-due" id="next-due">No hay entregas pendientes.</p>
+    </section>
 
-    <main id="content" class="container">
-        <section id="summary" class="panel" aria-labelledby="summary-title">
-            <h2 id="summary-title">Summary</h2>
-            <dl class="stats" aria-live="polite">
-                <div class="stat">
-                    <dt class="stat__label">Pending</dt>
-                    <dd class="stat__value" id="stat-pending">0</dd>
-                </div>
-                <div class="stat">
-                    <dt class="stat__label">Completed</dt>
-                    <dd class="stat__value" id="stat-completed">0</dd>
-                </div>
-                <div class="stat">
-                    <dt class="stat__label">Estimated pending hours</dt>
-                    <dd class="stat__value" id="stat-hours">0 h</dd>
-                </div>
-            </dl>
-            <div class="progress">
-                <label class="progress__label" for="progress">Task progress</label>
-                <progress id="progress" max="100" value="0"></progress>
-                <span class="progress__text" id="progress-text">0%</span>
-            </div>
-            <p class="next-due" id="next-due" aria-live="polite">No pending deadlines.</p>
-        </section>
+    <section id="new-task" class="panel" aria-labelledby="new-task-title">
+      <h2 class="panel__title" id="new-task-title">Nueva tarea</h2>
+      <form class="form" id="task-form">
+        <div class="form__field form__field--full">
+          <label class="form__label" for="title">Título</label>
+          <input class="form__control" type="text" id="title" name="title" maxlength="100" required>
+        </div>
+        <div class="form__field form__field--full">
+          <label class="form__label" for="description">Descripción (opcional)</label>
+          <textarea class="form__control" id="description" name="description" rows="3" maxlength="300"></textarea>
+        </div>
+        <div class="form__field">
+          <label class="form__label" for="subject">Materia</label>
+          <input class="form__control" type="text" id="subject" name="subject" maxlength="60" list="subject-options" autocomplete="off" required>
+          <datalist id="subject-options"></datalist>
+        </div>
+        <div class="form__field">
+          <label class="form__label" for="duration">Duración estimada (horas)</label>
+          <input class="form__control" type="number" id="duration" name="duration" min="0.5" max="40" step="0.5" required>
+        </div>
+        <div class="form__field">
+          <label class="form__label" for="priority">Prioridad</label>
+          <select class="form__control" id="priority" name="priority" required>
+            <option value="high">Alta</option>
+            <option value="medium" selected>Media</option>
+            <option value="low">Baja</option>
+          </select>
+        </div>
+        <div class="form__field">
+          <label class="form__label" for="due-date">Fecha límite</label>
+          <input class="form__control" type="date" id="due-date" name="dueDate" required>
+        </div>
+        <div class="form__actions">
+          <button class="btn btn--primary" type="submit">Crear tarea</button>
+          <p class="form__status" id="form-status" role="status"></p>
+        </div>
+      </form>
+    </section>
 
-        <section id="new-task" class="panel" aria-labelledby="new-task-title">
-            <h2 id="new-task-title">New task</h2>
-            <form class="form" id="task-form">
-                <div class="form__field form__field--full">
-                    <label for="title">Title</label>
-                    <input type="text" id="title" name="title" maxlength="100" required>
-                </div>
-                <div class="form__field form__field--full">
-                    <label for="description">Description (optional)</label>
-                    <textarea id="description" name="description" rows="3" maxlength="300"></textarea>
-                </div>
-                <div class="form__field">
-                    <label for="subject">Subject</label>
-                    <input type="text" id="subject" name="subject" maxlength="60" required>
-                </div>
-                <div class="form__field">
-                    <label for="duration">Estimated duration (hours)</label>
-                    <input type="number" id="duration" name="duration" min="0.5" max="40" step="0.5" required>
-                </div>
-                <div class="form__field">
-                    <label for="priority">Priority</label>
-                    <select id="priority" name="priority" required>
-                        <option value="high">High</option>
-                        <option value="medium" selected>Medium</option>
-                        <option value="low">Low</option>
-                    </select>
-                </div>
-                <div class="form__field">
-                    <label for="due-date">Due date</label>
-                    <input type="date" id="due-date" name="dueDate" required>
-                </div>
-                <div class="form__actions">
-                    <button class="btn btn--primary" type="submit">Create task</button>
-                </div>
-            </form>
-        </section>
+    <section id="tasks" class="panel" aria-labelledby="tasks-title">
+      <h2 class="panel__title" id="tasks-title" tabindex="-1">Tareas</h2>
+      <div class="notice notice--spaced" id="undo-notice" role="status" hidden>
+        <p id="undo-message"></p>
+        <button class="btn btn--secondary" id="undo-button" type="button">Deshacer</button>
+      </div>
+      <p class="empty-state" id="empty-state">Todavía no hay tareas. Agregá una con el formulario.</p>
+      <ul class="task-list" id="task-list"></ul>
+    </section>
+  </main>
 
-        <section id="tasks" class="panel" aria-labelledby="tasks-title">
-            <h2 id="tasks-title">Tasks</h2>
-            <p class="empty-state" id="empty-state">No tasks yet. Add one using the form.</p>
-            <ul class="task-list" id="task-list"></ul>
-        </section>
-    </main>
+  <footer class="site-footer">
+    <p>Schemaweek · Tus datos se guardan solo en este navegador.</p>
+  </footer>
 
-    <footer class="site-footer">
-        <p>Schemaweek · Module 2</p>
-    </footer>
+  <p class="visually-hidden" id="announcer" role="status"></p>
 
-    <template id="task-template">
-        <li class="task">
-            <input class="task__check" type="checkbox">
-            <div class="task__body">
-                <h3 class="task__title"></h3>
-                <p class="task__meta">
-                    <span class="task__subject"></span>
-                    <span class="task__duration"></span>
-                    <span class="badge"></span>
-                    <span class="badge badge--overdue" hidden>Overdue</span>
-                    <time class="task__due"></time>
-                </p>
-                <p class="task__description"></p>
-            </div>
-            <button class="btn btn--danger task__delete" type="button">Delete</button>
-        </li>
-    </template>
+  <template id="task-template">
+    <li class="task">
+      <label class="task__toggle">
+        <input class="task__check" type="checkbox">
+        <span class="visually-hidden task__toggle-text"></span>
+      </label>
+      <div class="task__body">
+        <h3 class="task__title"></h3>
+        <ul class="task__meta">
+          <li class="task__subject"></li>
+          <li class="task__duration"></li>
+          <li class="badge task__priority"></li>
+          <li class="badge badge--overdue task__overdue" hidden>Vencida</li>
+          <li class="badge badge--today task__today" hidden>Vence hoy</li>
+          <li><time class="task__due"></time></li>
+        </ul>
+        <p class="task__description"></p>
+      </div>
+      <button class="btn btn--danger task__delete" type="button">Eliminar</button>
+    </li>
+  </template>
 </body>
 </html>
