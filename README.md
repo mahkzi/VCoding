@@ -65,9 +65,9 @@ La aplicación conoce los horarios ocupados del estudiante y sus tareas pendient
 
 # Funcionalidades principales
 
-## 1. Dashboard
+## 1. Resumen
 
-El Dashboard será la pantalla principal de la aplicación.
+El Resumen será la pantalla principal de la aplicación.
 
 Debe mostrar un resumen rápido de la situación semanal del usuario.
 
@@ -97,8 +97,8 @@ Ejemplo conceptual:
 │ ████████████░░░░ 75%                │
 │                                     │
 │ Próxima entrega                     │
-│ 🔴 Trabajo SQL                      │
-│    Mañana · 23:59                   │
+│ 🔴 Trabajo SQL                     │
+│    Mañana ·                         │
 │                                     │
 └─────────────────────────────────────┘
 ```
@@ -432,7 +432,7 @@ La aplicación podría contar inicialmente con:
 ```text
 Schemaweek
 │
-├── Dashboard
+├── Resumen
 │
 ├── Calendario
 │
@@ -485,7 +485,7 @@ docs/
 
 Funcionalidades:
 
-- Dashboard.
+- Resumen.
 - Calendario.
 - Lista de tareas.
 - Materias.
@@ -547,7 +547,7 @@ src/
 │   └── WeeklySummary/
 │
 ├── pages/
-│   ├── Dashboard/
+│   ├── Resumen/
 │   ├── Calendar/
 │   ├── Subjects/
 │   └── Tasks/
@@ -595,7 +595,6 @@ Una vez desarrollado el núcleo de la aplicación, podrían agregarse:
 
 - Recordatorios.
 - Notificaciones.
-- Integración con calendarios externos.
 - Modo oscuro.
 - Hábitos.
 - Estadísticas avanzadas.
@@ -648,18 +647,8 @@ El proyecto busca transformar una lista de obligaciones en una **visión complet
 
 # Estado del proyecto
 
-Actualmente el proyecto se encuentra en etapa de **definición y planificación**.
+V1 y V2 en desarrollo
 
-### Próximo paso recomendado
-
-Antes de comenzar a programar:
-
-1. Definir las funcionalidades exactas de la V1.
-2. Definir las pantallas.
-3. Crear el flujo de navegación.
-4. Diseñar la estructura de cada página.
-5. Definir los datos que manejará cada entidad.
-6. Recién después comenzar con HTML y CSS.
 
 ## Lo que no va a incluir:
 
