@@ -421,7 +421,7 @@
     elements.undoButton.addEventListener('click', handleUndo);
     document.addEventListener('visibilitychange', handleVisibilityChange);
     window.addEventListener('storage', handleStorageChange);
-    render();
+    render() ;
     scheduleMidnightRefresh();
   }
 
